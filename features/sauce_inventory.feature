@@ -17,3 +17,8 @@ Feature: Funcionalidad del Inventario
     When agrego el producto "Sauce Labs Backpack" al carrito
     And agrego el producto "Sauce Labs Bike Light" al carrito
     Then el icono del carrito muestra "2"
+
+  Scenario: Eliminar un producto del carrito
+    When agrego el producto "Sauce Labs Backpack" al carrito
+    And elimino el producto "Sauce Labs Backpack" del carrito
+    Then el carrito deberia estar vacio
