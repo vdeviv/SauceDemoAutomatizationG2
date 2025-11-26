@@ -5,8 +5,8 @@ require 'capybara/cucumber'
 require 'capybara-screenshot/cucumber'
 
 #PTravel Settings
-ENV['USER']="Pepazo"
-ENV['PSW']="ILoveQA"
+ENV['USER']="megapro"
+ENV['PSW']="IHateQA"
 
 Capybara.default_driver = :selenium
 
