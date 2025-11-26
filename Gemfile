@@ -9,4 +9,5 @@ gem 'faker'             # (Opcional) Útil para generar datos de prueba falsos
 
 # Opcional, pero útil para depuración
 gem 'pry'
+gem 'capybara-screenshot'
 gem 'pry-byebug'
