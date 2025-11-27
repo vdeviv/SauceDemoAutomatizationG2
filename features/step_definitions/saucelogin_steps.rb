@@ -16,7 +16,7 @@ When('hago click en el botón {string}') do |button_name|
 end
 
 Then('soy redirigido a la página de productos') do
-  expect(page).to have_current_path('https://www.saucedemo.com/inventory.html') #preguntar /
+  expect(page).to have_current_path('https://www.saucedemo.com/inventory.html')
   expect(page).to have_css('.title', text: 'Products')
 end
 
@@ -43,6 +43,5 @@ Then('soy redirigido a la página de inicio de sesión') do
 end
 
 Then('veo el mensaje de error de login {string}') do |error_message|
-  # Este paso verifica el mensaje de error en la clase CSS usada por SauceDemo para errores.
   expect(page).to have_css('.error-message-container.error', text: error_message, wait: 5)
 end
