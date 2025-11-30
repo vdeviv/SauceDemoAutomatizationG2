@@ -1,36 +1,42 @@
-begin require 'rspec/expectations'; rescue LoadError; require 'spec/expectations'; end
+# frozen_string_literal: true
+
+# Requerimientos básicos
 require 'capybara'
 require 'capybara/dsl'
 require 'capybara/cucumber'
-require 'capybara-screenshot/cucumber'
+require 'capybara-screenshot/cucumber' 
+# Soporte para RSpec (incluye sintaxis antigua para compatibilidad)
+begin require 'rspec/expectations'; rescue LoadError; require 'spec/expectations'; end
 
-#PTravel Settings
+# --- Configuración de Variables de Entorno (Tomado de tu código) ---
 ENV['USER']="megapro"
 ENV['PSW']="IHateQA"
 
-Capybara.default_driver = :selenium
+# CRÍTICO: Añadir la carpeta 'pages' al load path global
+# Esto permite usar require 'nav_menu_page' sin rutas relativas complejas.
+# Se asume que 'pages' está al mismo nivel que 'support' (en la raíz del proyecto).
+$LOAD_PATH << File.expand_path('../../pages', __FILE__)
 
-# Set the host the Capybara tests should be run against
-Capybara.app_host = ENV["CAPYBARA_HOST"]
+# Extiende el contexto de Cucumber para incluir los métodos de Capybara (CRÍTICO)
+World(Capybara::DSL)
+World(RSpec::Matchers)
 
-# Set the time (in seconds) Capybara should wait for elements to appear on the page
-Capybara.default_max_wait_time = 15
-Capybara.default_driver = :selenium
-Capybara.app_host = "https://www.saucedemo.com"
-
+# --- Configuración y Registro del Driver ---
 class CapybaraDriverRegistrar
-  # register a Selenium driver for the given browser to run on the localhost
+  # Registra un driver de Selenium para el navegador dado
   def self.register_selenium_driver(browser)
     Capybara.register_driver :selenium do |app|
-      Capybara::Selenium::Driver.new(app, :browser => browser)
+      Capybara::Selenium::Driver.new(app, browser: browser)
     end
   end
-
 end
-# Register various Selenium drivers
-#CapybaraDriverRegistrar.register_selenium_driver(:internet_explorer)
-#CapybaraDriverRegistrar.register_selenium_driver(:firefox)
+# Se registra el driver de Chrome
 CapybaraDriverRegistrar.register_selenium_driver(:chrome)
-Capybara.run_server = false
-#World(Capybara)
 
+# --- Configuración Global de Capybara ---
+# Nota: Eliminamos las definiciones duplicadas y usamos los valores estándar.
+Capybara.default_driver = :selenium 
+Capybara.app_host = "https://www.saucedemo.com" # URL base
+# Usamos 10 segundos como estándar, ya que es más rápido que 15.
+Capybara.default_max_wait_time = 10 
+Capybara.run_server = false

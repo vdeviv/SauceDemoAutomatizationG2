@@ -7,7 +7,7 @@ Feature: Logout en SauceDemo
 Scenario: Logout exitoso después de la autenticación
   Given estoy en la página de inicio de sesión
   When ingreso el nombre de usuario "<username>"
-  And ingreso la contraseña "<password>"
+  And ingreso la contraseña "secret_sauce"
   And hago click en el botón "Login"
   Then soy redirigido a la página de productos
   
@@ -16,7 +16,7 @@ Scenario: Logout exitoso después de la autenticación
   Then soy redirigido a la página de inicio de sesión
   
    Examples:
-    | username              | password      |
-    | standard_user         | secret_sauce  |
-    | problem_user          | secret_sauce  |
-    | performance_glitch_user | secret_sauce  |
+    | username                 |
+    | standard_user            |
+    | problem_user             |
+    | performance_glitch_user  |
