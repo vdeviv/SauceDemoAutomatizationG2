@@ -4,6 +4,6 @@ After do
 end
 
 Before '@maximize' do
-  page.driver.browser.manage.window.maximize #before antes del escenario, se puede usar para el login?
+  page.driver.browser.manage.window.maximize
 end
 

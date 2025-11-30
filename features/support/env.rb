@@ -18,11 +18,27 @@ Capybara.default_max_wait_time = 15
 Capybara.default_driver = :selenium
 Capybara.app_host = "https://www.saucedemo.com"
 
+require 'selenium-webdriver'
+
 class CapybaraDriverRegistrar
   # register a Selenium driver for the given browser to run on the localhost
   def self.register_selenium_driver(browser)
     Capybara.register_driver :selenium do |app|
-      Capybara::Selenium::Driver.new(app, :browser => browser)
+      if browser == :chrome
+        options = Selenium::WebDriver::Chrome::Options.new
+        options.binary = "C:/Program Files (x86)/Google/Chrome/Application/chrome.exe"
+        options.add_argument('--disable-save-password-bubble')
+        options.add_argument('--disable-notifications')
+        options.add_argument('--disable-infobars')
+        # Desactivar el gestor de contraseñas y alertas de seguridad de contraseñas
+        options.add_preference('credentials_enable_service', false)
+        options.add_preference('profile.password_manager_enabled', false)
+        options.add_preference('profile.password_manager_leak_detection', false)
+        
+        Capybara::Selenium::Driver.new(app, :browser => browser, :options => options)
+      else
+        Capybara::Selenium::Driver.new(app, :browser => browser)
+      end
     end
   end
 
