@@ -3,25 +3,22 @@ Como un usuario de SauceDemo
 Quiero interactuar con el menú lateral
 Para poder acceder a todas las opciones: Todos los Items, About, Logout y Reset App State
 
-PRECONDICIÓN: Se asume que el usuario ya ha iniciado sesión
 
-Background: Configuración inicial
-Given estoy en la página de productos
-
-Scenario: Visualización del botón de cerrar menú
-When hago clic en el botón de menú
-Then debo ver el botón de cerrar menú
+Background: Login y Precondición
+Given estoy en la página de inicio de sesión
+And ingreso el nombre de usuario "standard_user"
+And ingreso la contraseña "secret_sauce"
+And hago click en el botón "Login"
 
 @smoke
 Scenario: Visualización de todos los ítems del menú disponibles
 When hago clic en el botón de menú
 Then debo ver los siguientes ítems del menú:
-| All Items |
+| All Items       |
 | About           |
 | Logout          |
 | Reset App State |
 
-@smoke
 Scenario: Redirección al hacer clic en Logout
 When hago clic en el botón de menú
 And hago clic en el botón de "Logout"

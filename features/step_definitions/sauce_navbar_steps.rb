@@ -1,43 +1,44 @@
 
 Given('estoy en la página de productos') do
    
-    nav_menu.visit_inventory_page 
 end
 
 When('hago clic en el botón de menú') do
-    nav_menu.click_menu_button
+  find('#react-burger-menu-btn').click
+  expect(page).to have_css('#menu_button_container', visible: true, wait: 5) 
 end
 
 When('hago clic en el botón de {string}') do |button_name|
     case button_name
     when "Logout"
-        nav_menu.click_logout_button
+        find('#logout_sidebar_link').click
     when "About"
-        nav_menu.click_about_button
+        find('#about_sidebar_link').click
     when "Reset App State"
-        nav_menu.click_reset_app_state_button
+        find('#reset_sidebar_link').click
     else
-        raise "Botón no reconocido en el menú: #{button_name}"
+        find('nav a', text: button_name).click
     end
 end
 
 Then('debo ver el botón de cerrar menú') do
-
     expect(page).to have_selector('#react-burger-cross-btn', visible: true)
 end
 
 Then('debo ver los siguientes ítems del menú:') do |table|
     expected_items = table.raw.flatten
-    actual_items = nav_menu.get_menu_items
+    
+    actual_items = all('.bm-item-list a').map(&:text)
+    
     expect(actual_items).to match_array(expected_items)
 end
 
 Then('debo ser redirigido a la página de inicio de sesión') do
     expect(page).to have_selector('#login-button', visible: true)
+    expect(page).to have_current_path('https://www.saucedemo.com/', wait: 5)
 end
 
 Then('debo ser redirigido al sitio web de Sauce Labs') do
-    # Ajustamos el 'wait' para ser consistente con Capybara default wait
     expect(page).to have_current_path(/saucelabs\.com/, url: true) 
 end
 
