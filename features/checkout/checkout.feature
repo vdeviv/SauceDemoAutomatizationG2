@@ -58,7 +58,6 @@ Feature: Flujo de Compra (Checkout)
     When hago click en el botón "Back Home"
     Then deberia ser redirigido a la página "Inventory"
 
-#si bien la pagina deja hacer checkout con el carrito vacio, se agrega este escenario para validar el flujo completo y que no rompa nada
   Scenario: Realizar checkout con el carrito vacío
     Given hago click en el botón "Cancel"
     When elimino el producto "Sauce Labs Backpack" del carrito

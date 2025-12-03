@@ -11,7 +11,6 @@ Feature: Footer y Redes Sociales
     And hago click en el botón "Login"
     And hago scroll hasta el final de la página
 
-  # Escenario 1: Validación Visual Estática
   Scenario: Verificar elementos del footer
     Then debería ver los iconos de redes sociales:
       | Twitter   |
@@ -19,7 +18,6 @@ Feature: Footer y Redes Sociales
       | LinkedIn  |
     And debería ver el texto de copyright "© 2025 Sauce Labs. All Rights Reserved. Terms of Service | Privacy Policy"
 
-  # Escenario 2: Navegación a Redes Sociales (Manejo de Pestañas)
   Scenario Outline: Los enlaces sociales abren la URL correcta en nueva pestaña
     When hago click en el icono de "<red_social>"
     Then se debería abrir una nueva pestaña con la URL "<url_esperada>"
