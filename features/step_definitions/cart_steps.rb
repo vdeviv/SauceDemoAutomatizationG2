@@ -72,7 +72,7 @@ Then('el boton del producto {string} debe mostrar {string}') do |nombre_producto
 end
 
 
-Then('debería ser redirigido a la página {string}') do |pagina_esperada|
+Then('deberia ser redirigido a la página {string}') do |pagina_esperada|
   url_parcial = case pagina_esperada
                 when 'Inventory' then 'inventory.html'
                 when 'Checkout Step One' then 'checkout-step-one.html'

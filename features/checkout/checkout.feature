@@ -47,3 +47,26 @@ Feature: Flujo de Compra (Checkout)
       |        | Gomez    | 12345         | Error: First Name is required  |
       | Ana    |          | 12345         | Error: Last Name is required   |
       | Ana    | Gomez    |               | Error: Postal Code is required |
+
+  Scenario: Verificación de botón 'Back Home' redirige a Inventario
+    When ingreso los datos de envío:
+      | nombre | apellido | codigo_postal |
+      | Luis   | Martinez | 67890         |
+    And hago click en el botón "Continue"
+    And hago click en el botón "Finish"
+    When hago click en el botón "Back Home"
+    Then deberia ser redirigido a la página "Inventory"
+
+#si bien la pagina deja hacer checkout con el carrito vacio, se agrega este escenario para validar el flujo completo y que no rompa nada
+  Scenario: Realizar checkout con el carrito vacío
+    Given hago click en el botón "Cancel"
+    When elimino el producto "Sauce Labs Backpack" del carrito
+    And elimino el producto "Sauce Labs Bike Light" del carrito
+    Then el carrito deberia estar vacio
+    When hago click en el botón "Checkout"
+    And ingreso los datos de envío:
+      | nombre | apellido | codigo_postal |
+      | Test   | Vacio    | 00000         |
+    And hago click en el botón "Continue"
+    When hago click en el botón "Finish"
+    Then deberia ver el mensaje de agradecimiento "Thank you for your order!"

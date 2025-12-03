@@ -35,7 +35,7 @@ Feature: Gestión del Carrito de Compras
     Given agrego el producto "Sauce Labs Fleece Jacket" al carrito
     And hago click en el icono del carrito
     When hago click en el botón "<boton>"
-    Then debería ser redirigido a la página "<pagina_esperada>"
+    Then deberia ser redirigido a la página "<pagina_esperada>"
 
     Examples:
       | boton             | pagina_esperada |
