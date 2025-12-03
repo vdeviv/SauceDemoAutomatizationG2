@@ -14,6 +14,7 @@ Feature: Flujo de Compra (Checkout)
     And hago click en el icono del carrito
     And hago click en el botón "Checkout"
 
+  @smoke
   Scenario: Flujo End-to-End con validación de envío y finalización
     When ingreso los datos de envío:
       | nombre | apellido | codigo_postal |

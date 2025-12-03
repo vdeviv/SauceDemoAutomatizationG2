@@ -10,6 +10,7 @@ Feature: Gestión del Carrito de Compras
     And ingreso la contraseña "secret_sauce"
     And hago click en el botón "Login"
 
+  @smoke
   Scenario: Verificar que los detalles del producto en el carrito sean correctos
     Given agrego el producto "Sauce Labs Backpack" al carrito
     And agrego el producto "Sauce Labs Bolt T-Shirt" al carrito

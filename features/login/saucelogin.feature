@@ -3,7 +3,7 @@ Feature: Login en SauceDemo
   Quiero iniciar sesión
   Para poder ver el catálogo de productos y validar diferentes estados de inicio de sesión
 
-@login_valido
+@login_valido @smoke
 Scenario Outline: Inicio de sesión y logout exitoso para diferentes usuarios
   Given estoy en la página de inicio de sesión
   When ingreso el nombre de usuario "<username>"
