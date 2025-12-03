@@ -45,4 +45,11 @@ end
 
 Then('veo el mensaje de error de login {string}') do |error_message|
   expect(page).to have_css('.error-message-container.error', text: error_message, wait: 5)
+  expect(page).to have_current_path('https://www.saucedemo.com/', wait: 5)
+  expect(page).to have_field('user-name', wait: 5)
+
+  expect(page).to have_button('Login', wait: 5)
+
+  expect(page).to have_css('.login_logo', text: 'Swag Labs', wait: 5)
+  expect(page).to have_field('password', wait: 5)
 end
