@@ -3,9 +3,7 @@
 # --- GESTIÓN DE PRODUCTOS (AGREGAR) ---
 
 Given('agrego el producto {string} al carrito') do |nombre_producto|
-  # Encontramos el contenedor del producto específico por su texto
   producto_card = find('.inventory_item', text: nombre_producto)
-  # Dentro de ese contenedor, buscamos el botón "Add to cart"
   producto_card.find('button', text: 'Add to cart').click
 end
 

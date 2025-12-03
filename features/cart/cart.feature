@@ -45,7 +45,6 @@ Feature: Gestión del Carrito de Compras
 
   # 4. Caso Borde / Estado Vacío
   Scenario: Validación visual de un carrito vacío
-    # No agregamos nada en el Given
     When hago click en el icono del carrito
     Then la lista de items del carrito debería estar vacía
     And el icono del carrito no debería mostrar ningún número
