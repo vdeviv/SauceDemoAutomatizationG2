@@ -1,5 +1,6 @@
 Given('estoy en la página de inicio de sesión') do
   visit '/' 
+  expect(page).to have_css('#login-button', wait: 10)
 end
 
 When('ingreso el nombre de usuario {string}') do |username|
