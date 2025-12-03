@@ -1,6 +1,5 @@
 # encoding: utf-8
 
-# --- LLENADO DE FORMULARIO (CHECKOUT STEP ONE) ---
 
 When('ingreso los datos de envío:') do |table|
   if table.headers.include?('nombre') && table.headers.include?('apellido')
@@ -14,7 +13,6 @@ When('ingreso los datos de envío:') do |table|
   fill_in 'postal-code', with: datos['codigo_postal']
 end
 
-# --- VALIDACIONES DEL RESUMEN (CHECKOUT STEP TWO) ---
 
 Then('deberia ver la información de pago {string}') do |info_pago|
   expect(page).to have_css('.summary_info', text: info_pago, wait: 5)
@@ -24,7 +22,6 @@ Then('deberia ver la información de envío {string}') do |info_envio|
   expect(page).to have_css('.summary_info', text: info_envio, wait: 5)
 end
 
-# --- VALIDACIONES FINANCIERAS RIGUROSAS ---
 
 Then(/^el (subtotal|impuesto|monto total final) \("(.*?)"\) deberia ser "(.*?)"$/) do |tipo, label, monto_esperado|
   clase_css = case tipo
@@ -36,7 +33,6 @@ Then(/^el (subtotal|impuesto|monto total final) \("(.*?)"\) deberia ser "(.*?)"$
   expect(page).to have_css(clase_css, text: monto_esperado, wait: 5)
 end
 
-# --- PANTALLA DE FINALIZACIÓN (CHECKOUT COMPLETE) ---
 
 Then('deberia ver el encabezado {string}') do |titulo_esperado|
   expect(find('.title').text).to eq(titulo_esperado)
@@ -50,7 +46,6 @@ Then('el botón visible deberia ser {string}') do |texto_boton|
   expect(page).to have_button(texto_boton)
 end
 
-# --- VALIDACIÓN DE ERRORES (NEGATIVE TESTS) ---
 
 Then('deberia ver el error de checkout {string}') do |mensaje_error|
   expect(page).to have_css('[data-test="error"]', text: mensaje_error, wait: 5)
