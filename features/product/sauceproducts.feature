@@ -1,5 +1,9 @@
 Feature: Visualización de Productos
 
+  Como un usuario de SauceDemo
+  Quiero visualizar de manera correcta todos los usuarios 
+  Para validar la pagina correctamente
+
   Background: Login exitoso
     Given estoy en la página de inicio de sesión
     When ingreso el nombre de usuario "standard_user"
