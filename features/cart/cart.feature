@@ -13,12 +13,14 @@ Feature: Gestión del Carrito de Compras
   # 1. Validación rigurosa de datos usando Tablas (Requiremento: Tablas)
   Scenario: Verificar que los detalles del producto en el carrito sean correctos
     Given agrego el producto "Sauce Labs Backpack" al carrito
+    And agrego el producto "Sauce Labs Bolt T-Shirt" al carrito
     And agrego el producto "Sauce Labs Onesie" al carrito
     When hago click en el icono del carrito
     Then veo los siguientes items en la lista del carrito:
-      | cantidad | nombre              | precio | descripcion_parcial                                         |
-      | 1        | Sauce Labs Backpack | $29.99 | carry.allTheThings() with the sleek, streamlined Sly Pack   |
-      | 1        | Sauce Labs Onesie   | $7.99  | Rib snap infant onesie for the junior automation engineer   |
+      | cantidad | nombre                  | precio | descripcion_parcial                                       |
+      | 1        | Sauce Labs Backpack     | $29.99 | carry.allTheThings() with the sleek, streamlined Sly Pack |
+      | 1        | Sauce Labs Bolt T-Shirt | $15.99 | Get your testing superhero on                             |
+      | 1        | Sauce Labs Onesie       | $7.99  | Rib snap infant onesie for the junior automation engineer |
 
   # 2. Flujo de eliminación y validación de contador (Requisito: Validaciones Rigurosas)
   Scenario: Eliminar items dentro del carrito actualiza el contador

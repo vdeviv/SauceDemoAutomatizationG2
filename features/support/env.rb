@@ -34,6 +34,14 @@ class CapybaraDriverRegistrar
         options.add_argument('--disable-save-password-bubble')
         options.add_argument('--disable-notifications')
         options.add_argument('--disable-infobars')
+        
+        # --- Optimizaciones de Velocidad ---
+        options.add_argument('--disable-extensions')       # Desactiva extensiones que consumen memoria
+        options.add_argument('--disable-gpu')              # Desactiva aceleración gráfica (más rápido en pruebas simples)
+        options.add_argument('--no-sandbox')               # Acelera el inicio del proceso
+        options.add_argument('--disable-dev-shm-usage')    # Optimiza el uso de memoria compartida
+        options.page_load_strategy = :eager                # No espera a que carguen imágenes/estilos pesados, solo el DOM
+
         # Desactivar el gestor de contraseñas y alertas de seguridad de contraseñas
         options.add_preference('credentials_enable_service', false)
         options.add_preference('profile.password_manager_enabled', false)
