@@ -1,13 +1,11 @@
 # encoding: utf-8
 
-# --- GESTIÓN DE PRODUCTOS (AGREGAR) ---
 
 Given('agrego el producto {string} al carrito') do |nombre_producto|
   producto_card = find('.inventory_item', text: nombre_producto)
   producto_card.find('button', text: 'Add to cart').click
 end
 
-# --- INTERACCIÓN CON EL CARRITO ---
 
 When('hago click en el icono del carrito') do
   find('.shopping_cart_link').click
@@ -17,7 +15,6 @@ When('abro el carrito') do
   find('.shopping_cart_link').click
 end
 
-# --- VALIDACIONES CON TABLAS (SCENARIO 1) ---
 
 Then('veo los siguientes items en la lista del carrito:') do |table|
   datos = table.hashes
@@ -29,7 +26,6 @@ Then('veo los siguientes items en la lista del carrito:') do |table|
   end
 end
 
-# --- VALIDACIONES DE CONTADOR Y ELIMINACIÓN ---
 
 Then('el icono del carrito muestra {string}') do |cantidad_esperada|
   expect(page).to have_css('.shopping_cart_badge', text: cantidad_esperada)
@@ -75,7 +71,6 @@ Then('el boton del producto {string} debe mostrar {string}') do |nombre_producto
   expect(producto_card).to have_button(texto_boton)
 end
 
-# --- NAVEGACIÓN ---
 
 Then('debería ser redirigido a la página {string}') do |pagina_esperada|
   url_parcial = case pagina_esperada
