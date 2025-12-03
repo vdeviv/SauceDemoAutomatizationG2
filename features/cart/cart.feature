@@ -10,7 +10,6 @@ Feature: Gestión del Carrito de Compras
     And ingreso la contraseña "secret_sauce"
     And hago click en el botón "Login"
 
-  # 1. Validación rigurosa de datos usando Tablas (Requiremento: Tablas)
   Scenario: Verificar que los detalles del producto en el carrito sean correctos
     Given agrego el producto "Sauce Labs Backpack" al carrito
     And agrego el producto "Sauce Labs Bolt T-Shirt" al carrito
@@ -22,7 +21,6 @@ Feature: Gestión del Carrito de Compras
       | 1        | Sauce Labs Bolt T-Shirt | $15.99 | Get your testing superhero on                             |
       | 1        | Sauce Labs Onesie       | $7.99  | Rib snap infant onesie for the junior automation engineer |
 
-  # 2. Flujo de eliminación y validación de contador (Requisito: Validaciones Rigurosas)
   Scenario: Eliminar items dentro del carrito actualiza el contador
     Given agrego el producto "Sauce Labs Backpack" al carrito
     And agrego el producto "Sauce Labs Bike Light" al carrito
@@ -33,7 +31,6 @@ Feature: Gestión del Carrito de Compras
     But el producto "Sauce Labs Bike Light" debería seguir en la lista
     And el icono del carrito muestra "1"
 
-  # 3. Navegación (Requisito: Escenarios Expresivos)
   Scenario Outline: Navegación desde el carrito de compras
     Given agrego el producto "Sauce Labs Fleece Jacket" al carrito
     And hago click en el icono del carrito
@@ -45,7 +42,6 @@ Feature: Gestión del Carrito de Compras
       | Continue Shopping | Inventory       |
       | Checkout          | Checkout Step One |
 
-  # 4. Caso Borde / Estado Vacío
   Scenario: Validación visual de un carrito vacío
     When hago click en el icono del carrito
     Then la lista de items del carrito debería estar vacía
