@@ -82,4 +82,16 @@ class CheckoutPage
   def verificar_error_checkout(mensaje_error)
     expect(page).to have_css(ERROR_MENSAJE, text: mensaje_error, wait: 5)
   end
+
+  def obtener_subtotal_numerico
+    find(SUBTOTAL_LABEL).text.gsub(/[^0-9.]/, '').to_f
+  end
+
+  def obtener_impuesto_numerico
+    find(IMPUESTO_LABEL).text.gsub(/[^0-9.]/, '').to_f
+  end
+
+  def obtener_total_numerico
+    find(TOTAL_LABEL).text.gsub(/[^0-9.]/, '').to_f
+  end
 end
