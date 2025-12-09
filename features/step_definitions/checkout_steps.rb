@@ -6,61 +6,51 @@ When('ingreso los datos de envío:') do |table|
     datos = table.rows_hash
   end
 
-  fill_in 'first-name', with: datos['nombre']
-  fill_in 'last-name', with: datos['apellido']
-  fill_in 'postal-code', with: datos['codigo_postal']
+  @checkout_page.ingresar_datos_envio(datos)
 end
 
 
 Then('deberia ver la información de pago {string}') do |info_pago|
-  expect(page).to have_css('.summary_info', text: info_pago, wait: 5)
+  @checkout_page.verificar_info_resumen(info_pago)
 end
 
 Then('deberia ver la información de envío {string}') do |info_envio|
-  expect(page).to have_css('.summary_info', text: info_envio, wait: 5)
+  @checkout_page.verificar_info_resumen(info_envio)
 end
 
 
 Then(/^el (subtotal|impuesto|monto total final) \("(.*?)"\) deberia ser "(.*?)"$/) do |tipo, label, monto_esperado|
-  clase_css = case tipo
-              when 'subtotal' then '.summary_subtotal_label'
-              when 'impuesto' then '.summary_tax_label'
-              when 'monto total final' then '.summary_total_label'
-              end
-  expect(page).to have_css(clase_css, text: label, wait: 5)
-  expect(page).to have_css(clase_css, text: monto_esperado, wait: 5)
+  @checkout_page.verificar_monto(tipo, label, monto_esperado)
 end
 
 Then('el monto total debe ser calculado correctamente sumando subtotal e impuestos') do
+  # Delegamos la obtención de valores a la página
+  subtotal = @checkout_page.obtener_subtotal_numerico
+  impuesto = @checkout_page.obtener_impuesto_numerico
+  total_ui = @checkout_page.obtener_total_numerico
 
-  texto_subtotal = find('.summary_subtotal_label').text
-  texto_impuesto = find('.summary_tax_label').text
-  texto_total    = find('.summary_total_label').text
-
-  subtotal = texto_subtotal.gsub(/[^0-9.]/, '').to_f
-  impuesto = texto_impuesto.gsub(/[^0-9.]/, '').to_f
-  total_ui = texto_total.gsub(/[^0-9.]/, '').to_f
-
+  # Calcular el total esperado
   total_calculado = (subtotal + impuesto).round(2)
 
+  # Validar
   puts "Subtotal: #{subtotal} | Tax: #{impuesto} | Total UI: #{total_ui} | Calculado: #{total_calculado}"
   expect(total_ui).to eq(total_calculado)
 end
 
 
 Then('deberia ver el encabezado {string}') do |titulo_esperado|
-  expect(find('.title').text).to eq(titulo_esperado)
+  @checkout_page.verificar_encabezado(titulo_esperado)
 end
 
 Then('deberia ver el mensaje de agradecimiento {string}') do |mensaje_esperado|
-  expect(find('.complete-header').text).to eq(mensaje_esperado)
+  @checkout_page.verificar_mensaje_agradecimiento(mensaje_esperado)
 end
 
 Then('el botón visible deberia ser {string}') do |texto_boton|
-  expect(page).to have_button(texto_boton)
+  @checkout_page.verificar_boton_visible(texto_boton)
 end
 
 
 Then('deberia ver el error de checkout {string}') do |mensaje_error|
-  expect(page).to have_css('[data-test="error"]', text: mensaje_error, wait: 5)
+  @checkout_page.verificar_error_checkout(mensaje_error)
 end
