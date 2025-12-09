@@ -31,6 +31,25 @@ Then(/^el (subtotal|impuesto|monto total final) \("(.*?)"\) deberia ser "(.*?)"$
   expect(page).to have_css(clase_css, text: monto_esperado, wait: 5)
 end
 
+Then('el monto total debe ser calculado correctamente sumando subtotal e impuestos') do
+  # 1. Obtener los textos de la UI
+  texto_subtotal = find('.summary_subtotal_label').text  # Ej: "Item total: $39.98"
+  texto_impuesto = find('.summary_tax_label').text       # Ej: "Tax: $3.20"
+  texto_total    = find('.summary_total_label').text     # Ej: "Total: $43.18"
+
+  # 2. Limpiar y parsear a Float (eliminando texto y símbolo $)
+  subtotal = texto_subtotal.gsub(/[^0-9.]/, '').to_f
+  impuesto = texto_impuesto.gsub(/[^0-9.]/, '').to_f
+  total_ui = texto_total.gsub(/[^0-9.]/, '').to_f
+
+  # 3. Calcular el total esperado
+  total_calculado = (subtotal + impuesto).round(2)
+
+  # 4. Validar
+  puts "Subtotal: #{subtotal} | Tax: #{impuesto} | Total UI: #{total_ui} | Calculado: #{total_calculado}"
+  expect(total_ui).to eq(total_calculado)
+end
+
 
 Then('deberia ver el encabezado {string}') do |titulo_esperado|
   expect(find('.title').text).to eq(titulo_esperado)
