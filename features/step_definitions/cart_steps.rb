@@ -1,6 +1,13 @@
 
 Given('agrego el producto {string} al carrito') do |nombre_producto|
-  @product_page.add_product_to_cart(nombre_producto)
+  producto_card = find('.inventory_item', text: nombre_producto)
+  producto_card.find('button', text: 'Add to cart').click
+end
+
+Given('agrego los siguientes productos al carrito:') do |table|
+  table.raw.flatten.each do |nombre_producto|
+    step "agrego el producto \"#{nombre_producto}\" al carrito"
+  end
 end
 
 
