@@ -36,5 +36,34 @@ class ProductPage
     product_card = find('.inventory_item', text: product_name, match: :first)
     product_card.has_button?(button_text)
   end
+
+  def get_product_count
+    all('.inventory_item').count
+  end
+
+  def get_product_info(product_name)
+    product = find('.inventory_item', text: product_name)
+    price = product.find('.inventory_item_price').text
+    description = product.find('.inventory_item_desc').text
+    { price: price, description: description }
+  end
+
+  def all_images_are_visible?
+    all('.inventory_item_img img').each do |img|
+      raise "Imagen no visible" unless img.visible?
+    end
+  end
+
+  def click_product_name(product_name)
+    find('.inventory_item_name', text: product_name).click
+  end
+
+  def is_on_product_details_page?(product_name)
+    has_css?('.inventory_details_name', text: product_name)
+  end
+
+  def click_back_to_products
+    find('#back-to-products').click
+  end
   
 end
