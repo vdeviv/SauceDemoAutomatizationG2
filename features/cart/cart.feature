@@ -12,9 +12,10 @@ Feature: Gestión del Carrito de Compras
  
   @smoke
   Scenario: Verificar que los detalles del producto en el carrito sean correctos
-    Given agrego el producto "Sauce Labs Backpack" al carrito
-    And agrego el producto "Sauce Labs Bolt T-Shirt" al carrito
-    And agrego el producto "Sauce Labs Onesie" al carrito
+    Given agrego los siguientes productos al carrito:
+      | Sauce Labs Backpack     |
+      | Sauce Labs Bolt T-Shirt |
+      | Sauce Labs Onesie       |
     When hago click en el icono del carrito
     Then veo los siguientes items en la lista del carrito:
       | cantidad | nombre                  | precio | descripcion_parcial                                       |
