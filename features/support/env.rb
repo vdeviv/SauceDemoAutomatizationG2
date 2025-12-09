@@ -10,12 +10,12 @@ begin require 'rspec/expectations'; rescue LoadError; require 'spec/expectations
 
 # --- Configuración de Variables de Entorno (Tomado de tu código) ---
 ENV['USER']="megapro"
-ENV['PSW']="IHateQA"
+ENV['PSW']="ITRYLOVEQA"
 
 # CRÍTICO: Añadir la carpeta 'pages' al load path global
 # Esto permite usar require 'nav_menu_page' sin rutas relativas complejas.
 # Se asume que 'pages' está al mismo nivel que 'support' (en la raíz del proyecto).
-$LOAD_PATH << File.expand_path('../../pages', __FILE__)
+$LOAD_PATH << File.expand_path('../pages', __FILE__)
 
 # Extiende el contexto de Cucumber para incluir los métodos de Capybara (CRÍTICO)
 World(Capybara::DSL)
