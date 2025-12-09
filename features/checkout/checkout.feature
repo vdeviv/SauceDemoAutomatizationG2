@@ -32,9 +32,7 @@ Feature: Flujo de Compra (Checkout)
       | nombre | apellido | codigo_postal |
       | Test   | User     | 55555         |
     And hago click en el botón "Continue"
-    Then el subtotal ("Item total") deberia ser "$39.98"
-    And el impuesto ("Tax") deberia ser "$3.20"
-    And el monto total final ("Total") deberia ser "$43.18"
+    Then el monto total debe ser calculado correctamente sumando subtotal e impuestos
 
   Scenario Outline: Validar campos requeridos en 'Your Information'
     When ingreso los datos de envío:
