@@ -1,3 +1,6 @@
+# encoding: utf-8
+
+
 When('ingreso los datos de envío:') do |table|
   if table.headers.include?('nombre') && table.headers.include?('apellido')
     datos = table.hashes.first 

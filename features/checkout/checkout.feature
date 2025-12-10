@@ -9,39 +9,33 @@ Feature: Flujo de Compra (Checkout)
     And ingreso el nombre de usuario "standard_user"
     And ingreso la contraseña "secret_sauce"
     And hago click en el botón "Login"
-    # Precondición: Carrito con items específicos para validar cálculos exactos
     And agrego el producto "Sauce Labs Backpack" al carrito
     And agrego el producto "Sauce Labs Bike Light" al carrito
     And hago click en el icono del carrito
     And hago click en el botón "Checkout"
 
-  # Basado en Imagen 2 (Overview) y Imagen 3 (Complete)
+  @smoke
   Scenario: Flujo End-to-End con validación de envío y finalización
     When ingreso los datos de envío:
       | nombre | apellido | codigo_postal |
       | Juan   | Perez    | 12345         |
     And hago click en el botón "Continue"
-    # Validación Rigurosa: Información de envío (Imagen 2)
     Then deberia ver la información de pago "SauceCard #31337"
     And deberia ver la información de envío "Free Pony Express Delivery!"
     When hago click en el botón "Finish"
-    # Validación Rigurosa: Pantalla final (Imagen 3)
     Then deberia ver el encabezado "Checkout: Complete!"
     And deberia ver el mensaje de agradecimiento "Thank you for your order!"
     And el botón visible deberia ser "Back Home"
 
-  # Basado en Imagen 2 (Cálculos Matemáticos)
   Scenario: Validación rigurosa de desglose financiero (Impuestos y Total)
     When ingreso los datos de envío:
       | nombre | apellido | codigo_postal |
       | Test   | User     | 55555         |
     And hago click en el botón "Continue"
-    # Validaciones exactas tomadas de tu captura de pantalla
     Then el subtotal ("Item total") deberia ser "$39.98"
     And el impuesto ("Tax") deberia ser "$3.20"
     And el monto total final ("Total") deberia ser "$43.18"
 
-  # Basado en Imagen 1 (Validaciones de formulario)
   Scenario Outline: Validar campos requeridos en 'Your Information'
     When ingreso los datos de envío:
       | nombre   | apellido   | codigo_postal   |
@@ -54,3 +48,25 @@ Feature: Flujo de Compra (Checkout)
       |        | Gomez    | 12345         | Error: First Name is required  |
       | Ana    |          | 12345         | Error: Last Name is required   |
       | Ana    | Gomez    |               | Error: Postal Code is required |
+
+  Scenario: Verificación de botón 'Back Home' redirige a Inventario
+    When ingreso los datos de envío:
+      | nombre | apellido | codigo_postal |
+      | Luis   | Martinez | 67890         |
+    And hago click en el botón "Continue"
+    And hago click en el botón "Finish"
+    When hago click en el botón "Back Home"
+    Then deberia ser redirigido a la página "Inventory"
+
+  Scenario: Realizar checkout con el carrito vacío
+    Given hago click en el botón "Cancel"
+    When elimino el producto "Sauce Labs Backpack" del carrito
+    And elimino el producto "Sauce Labs Bike Light" del carrito
+    Then el carrito deberia estar vacio
+    When hago click en el botón "Checkout"
+    And ingreso los datos de envío:
+      | nombre | apellido | codigo_postal |
+      | Test   | Vacio    | 00000         |
+    And hago click en el botón "Continue"
+    When hago click en el botón "Finish"
+    Then deberia ver el mensaje de agradecimiento "Thank you for your order!"

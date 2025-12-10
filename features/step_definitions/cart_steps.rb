@@ -1,8 +1,11 @@
+# encoding: utf-8
+
 
 Given('agrego el producto {string} al carrito') do |nombre_producto|
   producto_card = find('.inventory_item', text: nombre_producto)
   producto_card.find('button', text: 'Add to cart').click
 end
+
 
 When('hago click en el icono del carrito') do
   find('.shopping_cart_link').click
@@ -68,9 +71,8 @@ Then('el boton del producto {string} debe mostrar {string}') do |nombre_producto
   expect(producto_card).to have_button(texto_boton)
 end
 
-# --- NAVEGACIÓN ---
 
-Then('debería ser redirigido a la página {string}') do |pagina_esperada|
+Then('deberia ser redirigido a la página {string}') do |pagina_esperada|
   url_parcial = case pagina_esperada
                 when 'Inventory' then 'inventory.html'
                 when 'Checkout Step One' then 'checkout-step-one.html'

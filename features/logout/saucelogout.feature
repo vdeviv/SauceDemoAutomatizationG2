@@ -3,7 +3,7 @@ Feature: Logout en SauceDemo
   Quiero cerrar sesión de forma segura
   Para proteger mi cuenta
 
-@logout
+@logout @smoke
 Scenario: Logout exitoso después de la autenticación
   Given estoy en la página de inicio de sesión
   When ingreso el nombre de usuario "<username>"
