@@ -1,15 +1,8 @@
-# encoding: utf-8
-
-# --- GESTIÓN DE PRODUCTOS (AGREGAR) ---
 
 Given('agrego el producto {string} al carrito') do |nombre_producto|
-  # Encontramos el contenedor del producto específico por su texto
   producto_card = find('.inventory_item', text: nombre_producto)
-  # Dentro de ese contenedor, buscamos el botón "Add to cart"
   producto_card.find('button', text: 'Add to cart').click
 end
-
-# --- INTERACCIÓN CON EL CARRITO ---
 
 When('hago click en el icono del carrito') do
   find('.shopping_cart_link').click
@@ -19,7 +12,6 @@ When('abro el carrito') do
   find('.shopping_cart_link').click
 end
 
-# --- VALIDACIONES CON TABLAS (SCENARIO 1) ---
 
 Then('veo los siguientes items en la lista del carrito:') do |table|
   datos = table.hashes
@@ -31,7 +23,6 @@ Then('veo los siguientes items en la lista del carrito:') do |table|
   end
 end
 
-# --- VALIDACIONES DE CONTADOR Y ELIMINACIÓN ---
 
 Then('el icono del carrito muestra {string}') do |cantidad_esperada|
   expect(page).to have_css('.shopping_cart_badge', text: cantidad_esperada)
