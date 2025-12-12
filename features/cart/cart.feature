@@ -8,8 +8,8 @@ Feature: Gestión del Carrito de Compras
     Given estoy en la página de inicio de sesión
     And ingreso el nombre de usuario "standard_user"
     And ingreso la contraseña "secret_sauce"
-    And hago click en el botón "Login"
-
+    And hago click en el botón "Login" 
+ 
   @smoke
   Scenario: Verificar que los detalles del producto en el carrito sean correctos
     Given agrego el producto "Sauce Labs Backpack" al carrito
@@ -35,7 +35,7 @@ Feature: Gestión del Carrito de Compras
   Scenario Outline: Navegación desde el carrito de compras
     Given agrego el producto "Sauce Labs Fleece Jacket" al carrito
     And hago click en el icono del carrito
-    When hago click en el botón "<boton>"
+    When hago click en el botón de navegación "<boton>"
     Then deberia ser redirigido a la página "<pagina_esperada>"
 
     Examples:

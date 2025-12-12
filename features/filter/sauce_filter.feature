@@ -4,7 +4,7 @@ Feature: Filtro y Ordenamiento de Productos
   Quiero ordenar el catálogo de productos
   Para encontrar artículos por precio o nombre más fácilmente
 
-  Background:
+  Background: 
     Given estoy en la página de inicio de sesión
     And ingreso el nombre de usuario "standard_user"
     And ingreso la contraseña "secret_sauce"
