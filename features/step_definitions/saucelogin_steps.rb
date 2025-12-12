@@ -20,17 +20,14 @@ Then('soy redirigido a la página de productos') do
 end
 
 When('hago click en el botón de menú') do
-  # ✅ Usamos la instancia @nav_menu_page (inicializada en hooks)
   @nav_menu_page.open_menu
 end
 
 When('hago click en el enlace {string}') do |link_text|
-  # ✅ Usamos la instancia @nav_menu_page
   @nav_menu_page.click_menu_item(link_text)
 end
 
 Then('soy redirigido a la página de inicio de sesión') do
-  # ✅ Usamos el método de validación de LoginPage
   expect(@login_page.is_on_login_page?).to be true
 end
 

@@ -13,7 +13,7 @@ Before do |scenario|
   #@footer_page = FooterPage.new
   @nav_menu_page = NavMenuPage.new 
   @product_page = ProductPage.new
- # @filter_page = FilterPage.new
+  @filter_page = FilterPage.new
 
   
 end
