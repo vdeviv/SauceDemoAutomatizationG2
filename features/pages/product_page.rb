@@ -7,9 +7,8 @@ class ProductPage
   
   ADD_TO_CART_BUTTON = 'button[data-test^="add-to-cart"]' 
 
-  # Método que verifica que estás en la página de productos (Inventory)
   def is_on_product_page?
-    # Busca el título 'Products' para confirmar la ubicación
+
     has_css?(PRODUCTS_TITLE, text: 'Products', wait: 5)
   end
 

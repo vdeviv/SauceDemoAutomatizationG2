@@ -1,22 +1,21 @@
 Given('estoy en la página de inventario') do
-  # Este método ahora existirá en ProductPage
+
   expect(@product_page.is_on_product_page?).to be true 
 end
 
-# --- ACCIÓN ---
 When('selecciono la opción de ordenar por {string}') do |opcion_texto|
-  # Delegamos la acción a FilterPage
+
   @filter_page.select_sort_option(opcion_texto)
   
   sleep 0.5 
 end
 
-# --- VALIDACIÓN (Lógica Compleja de Aserción) ---
+
 Then('los productos deberían ordenarse por {string}') do |criterio|
   
   case criterio
   when 'nombre_asc'
-    # Obtención de datos delegada a FilterPage
+
     nombres_ui = @filter_page.get_visible_product_names 
     nombres_esperados = nombres_ui.sort
     

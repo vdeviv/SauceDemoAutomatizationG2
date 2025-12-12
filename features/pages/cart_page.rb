@@ -27,7 +27,7 @@ class CartPage
   when "Checkout"
     find(CHECKOUT_BUTTON).click
   else
-    click_button(button_name) # <-- Esto es arriesgado
+    click_button(button_name) 
   end
 end
   

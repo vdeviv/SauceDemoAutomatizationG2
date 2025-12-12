@@ -1,6 +1,4 @@
-# frozen_string_literal: true
 
-# Requerimientos básicos
 require 'capybara'
 require 'capybara/dsl'
 require 'capybara/cucumber'
@@ -8,19 +6,16 @@ require 'capybara-screenshot/cucumber'
 
 begin require 'rspec/expectations'; rescue LoadError; require 'spec/expectations'; end
 
-# --- Configuración de Variables de Entorno (Tomado de tu código) ---
 ENV['USER']="megapro"
 ENV['PSW']="ITRYLOVEQA"
 
 
-#$LOAD_PATH << File.expand_path('../pages', __FILE__)
 
 World(Capybara::DSL)
 World(RSpec::Matchers)
 
 require 'selenium-webdriver'
 
-# --- Configuración y Registro del Driver ---
 class CapybaraDriverRegistrar
   def self.register_selenium_driver(browser)
     Capybara.register_driver :selenium do |app|

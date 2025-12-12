@@ -10,7 +10,7 @@ Before do |scenario|
   @login_page = LoginPage.new
   @cart_page = CartPage.new
   @checkout_page = CheckoutPage.new
-  #@footer_page = FooterPage.new
+  @footer_page = FooterPage.new
   @nav_menu_page = NavMenuPage.new 
   @product_page = ProductPage.new
   @filter_page = FilterPage.new
