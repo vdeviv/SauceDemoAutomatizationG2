@@ -4,10 +4,16 @@ class CartPage
   CART_TITLE = '.title'
   CART_ITEM = '.cart_item' 
   CONTINUE_SHOPPING_BUTTON = '#continue-shopping'
-  CHECKOUT_BUTTON = '#checkout'
+  CHECKOUT_BUTTON = '#checkout' 
   
 
+  def add_product(product_name)
+    find_inventory_item(product_name).find('button').click
+  end
 
+  def go_to_cart
+    navigate_with_fallback('.shopping_cart_link', '/cart.html')
+  end
   def remove_item(product_name)
 
     item = find(CART_ITEM, text: product_name, match: :first)
@@ -15,15 +21,15 @@ class CartPage
   end
   
   def click_navigation_button(button_name)
-    case button_name
-    when "Continue Shopping"
-      find(CONTINUE_SHOPPING_BUTTON).click
-    when "Checkout"
-      find(CHECKOUT_BUTTON).click
-    else
-      click_button(button_name) 
-    end
+  case button_name
+  when "Continue Shopping"
+    find(CONTINUE_SHOPPING_BUTTON).click
+  when "Checkout"
+    find(CHECKOUT_BUTTON).click
+  else
+    click_button(button_name) # <-- Esto es arriesgado
   end
+end
   
 
   def verify_cart_items_details(expected_items)

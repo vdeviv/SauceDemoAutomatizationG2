@@ -1,6 +1,3 @@
-# step_definitions/cart_steps.rb (REFATORIZADO)
-
-# NO HAY require AQUÍ. Las variables @product_page y @cart_page están listas.
 
 Given('agrego el producto {string} al carrito') do |nombre_producto|
   # ✅ Usar @product_page directamente
@@ -93,5 +90,9 @@ Then('deberia ser redirigido a la página {string}') do |pagina_esperada|
                   raise "Página desconocida: #{pagina_esperada}"
                 end
               
-  expect(current_url).to include(url_parcial)
+  expect(current_url).to include(url_parcial) 
+end
+
+When('hago click en el botón de navegación {string}') do |button_name|
+  @cart_page.click_navigation_button(button_name)
 end
