@@ -41,4 +41,12 @@ class LoginPage
     find(:css, '#login_button_container > div > form > div.error-message-container.error > h3').text
   end
 
+  def error_message_is_visible?(expected_message)
+    get_error_message == expected_message
+  end
+
+  def is_on_login_page?
+    has_button?('login-button')
+  end
+
 end

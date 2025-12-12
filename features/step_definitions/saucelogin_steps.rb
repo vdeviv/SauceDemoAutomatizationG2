@@ -35,6 +35,5 @@ Then('soy redirigido a la página de inicio de sesión') do
 end
 
 Then('veo el mensaje de error de login {string}') do |error_message|
-  # ✅ Usamos el método de validación de LoginPage
   expect(@login_page.error_message_is_visible?(error_message)).to be true
 end
