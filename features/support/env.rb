@@ -13,7 +13,7 @@ ENV['USER']="megapro"
 ENV['PSW']="ITRYLOVEQA"
 
 
-$LOAD_PATH << File.expand_path('../pages', __FILE__)
+#$LOAD_PATH << File.expand_path('../pages', __FILE__)
 
 World(Capybara::DSL)
 World(RSpec::Matchers)

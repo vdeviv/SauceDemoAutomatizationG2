@@ -1,55 +1,40 @@
+
 Given('estoy en la página de inicio de sesión') do
-  visit '/' 
-  expect(page).to have_css('#login-button', wait: 10)
+  @login_page.visit_login_page
 end
 
 When('ingreso el nombre de usuario {string}') do |username|
-  fill_in 'user-name', with: username 
+  @login_page.enter_username(username)
 end
 
 When('ingreso la contraseña {string}') do |password|
-  fill_in 'password', with: password 
-
+  @login_page.enter_password(password)
 end
 
 When('hago click en el botón {string}') do |button_name|
-  click_button button_name
+  @login_page.click_login_button
 end
 
 Then('soy redirigido a la página de productos') do
-  expect(page).to have_current_path('https://www.saucedemo.com/inventory.html')
-  expect(page).to have_css('.title', text: 'Products')
+  expect(@login_page.expected_title_displayed?('Products')).to be true
 end
 
 When('hago click en el botón de menú') do
-  find('#react-burger-menu-btn').click
-  expect(page).to have_css('#logout_sidebar_link', visible: true, wait: 5) 
+  # ✅ Usamos la instancia @nav_menu_page (inicializada en hooks)
+  @nav_menu_page.open_menu
 end
 
 When('hago click en el enlace {string}') do |link_text|
-  if link_text == "Logout"
-    find('#logout_sidebar_link').click
-  else
-    click_link(link_text)
-  end
-
+  # ✅ Usamos la instancia @nav_menu_page
+  @nav_menu_page.click_menu_item(link_text)
 end
 
 Then('soy redirigido a la página de inicio de sesión') do
- 
-  expect(page).to have_field('user-name', wait: 5)
-  
-  expect(page).to have_current_path('https://www.saucedemo.com/', wait: 5)
-  
+  # ✅ Usamos el método de validación de LoginPage
+  expect(@login_page.is_on_login_page?).to be true
 end
 
 Then('veo el mensaje de error de login {string}') do |error_message|
-  expect(page).to have_css('.error-message-container.error', text: error_message, wait: 5)
-  expect(page).to have_current_path('https://www.saucedemo.com/', wait: 5)
-  expect(page).to have_field('user-name', wait: 5)
-
-  expect(page).to have_button('Login', wait: 5)
-
-  expect(page).to have_css('.login_logo', text: 'Swag Labs', wait: 5)
-  expect(page).to have_field('password', wait: 5)
+  # ✅ Usamos el método de validación de LoginPage
+  expect(@login_page.error_message_is_visible?(error_message)).to be true
 end
