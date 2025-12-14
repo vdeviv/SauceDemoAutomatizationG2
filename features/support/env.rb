@@ -21,7 +21,7 @@ class CapybaraDriverRegistrar
     Capybara.register_driver :selenium do |app|
       if browser == :chrome
         options = Selenium::WebDriver::Chrome::Options.new
-        options.binary = "C:/ProgramData/Microsoft/Windows/Start Menu/Programs"
+        options.binary = "C:\\Program Files (x86)\\Google\\Chrome\\Application\\chrome.exe"
         
         options.add_argument('--disable-save-password-bubble')
         options.add_argument('--disable-notifications')

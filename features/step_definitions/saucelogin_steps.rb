@@ -12,7 +12,22 @@ When('ingreso la contraseña {string}') do |password|
 end
 
 When('hago click en el botón {string}') do |button_name|
-  @login_page.click_login_button
+  case button_name
+  when 'Login'
+    @login_page.click_login_button
+  when 'Checkout', 'Continue Shopping'
+    @cart_page.click_navigation_button(button_name)
+  when 'Continue'
+    @checkout_page.click_continue
+  when 'Finish'
+    @checkout_page.click_finish
+  when 'Back Home'
+    @checkout_page.click_back_home
+  when 'Cancel'
+     click_button 'cancel'
+  else
+    click_button button_name
+  end
 end
 
 Then('soy redirigido a la página de productos') do

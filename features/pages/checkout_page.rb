@@ -21,9 +21,9 @@ class CheckoutPage
   
  
   def ingresar_datos_envio(datos)
-    fill_in CAMPO_NOMBRE, with: datos['nombre']
-    fill_in CAMPO_APELLIDO, with: datos['apellido']
-    fill_in CAMPO_CODIGO_POSTAL, with: datos['codigo_postal']
+    find(CAMPO_NOMBRE).set(datos['nombre'])
+    find(CAMPO_APELLIDO).set(datos['apellido'])
+    find(CAMPO_CODIGO_POSTAL).set(datos['codigo_postal'])
   end
 
 
